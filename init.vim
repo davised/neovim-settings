@@ -22,17 +22,14 @@ if !filereadable(vimplug_exists)
 endif
 
 " Required:
-call plug#begin(expand('~/.local/share/nvim'))
+call plug#begin(expand('~/.local/nvim/plugged'))
 
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Raimondi/delimitMate'
@@ -40,7 +37,7 @@ Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
-Plug 'jalvesaq/Nvim-R', { 'tag': 'v0.9.11' }
+Plug 'jalvesaq/Nvim-R'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 
@@ -54,7 +51,6 @@ let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
 endif
-Plug 'Shougo/vimproc.vim', {'do': g:make}
 
 "" Vim-Session
 Plug 'xolox/vim-misc'
@@ -62,11 +58,6 @@ Plug 'xolox/vim-session'
 
 if v:version >= 703
   Plug 'Shougo/vimshell.vim'
-endif
-
-if v:version >= 704
-  "" Snippets
-  Plug 'SirVer/ultisnips'
 endif
 
 Plug 'honza/vim-snippets'
@@ -136,10 +127,6 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-
-"" Directories for swp files
-" set nobackup
-" set noswapfile
 
 set fileformats=unix,dos,mac
 set showcmd
@@ -214,12 +201,8 @@ set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-if exists("*fugitive#statusline")
-  set statusline+=%{fugitive#statusline()}
-endif
-
 " vim-airline
-let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'molokai'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -241,19 +224,6 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
-"" NERDTree configuration
-" let g:NERDTreeChDirMode=2
-" let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-" let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-" let g:NERDTreeShowBookmarks=1
-" let g:nerdtree_tabs_focus_on_files=1
-" let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-" let g:NERDTreeWinSize = 50
-" set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-" nnoremap <silent> <F2> :NERDTreeFind<CR>
-" noremap <F3> :NERDTreeToggle<CR>
-
-" grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
 let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
@@ -319,15 +289,6 @@ set autoread
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 
-"" Git
-noremap <Leader>ga :Gwrite<CR>
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gsh :Gpush<CR>
-noremap <Leader>gll :Gpull<CR>
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gd :Gvdiff<CR>
-noremap <Leader>gr :Gremove<CR>
 
 " session management
 nnoremap <leader>so :OpenSession<Space>
@@ -371,12 +332,6 @@ cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>e :FZF -m<CR>
 
-" snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-let g:UltiSnipsEditSplit="vertical"
-
 " syntastic
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_error_symbol='✗'
@@ -396,11 +351,11 @@ if has('autocmd')
   autocmd GUIEnter * set visualbell t_vb=
 endif
 
-"" Copy/Paste/Cut
-" set clipboard^=unnamed,unnamedplus
-" if has('unnamedplus')
-"   set clipboard=unnamed,unnamedplus
-" endif
+" Copy/Paste/Cut
+set clipboard^=unnamed,unnamedplus
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
 
 noremap YY "+y<CR>
 noremap <leader>p "+gP<CR>
