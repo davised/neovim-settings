@@ -8,3 +8,6 @@ autocmd BufNewFile *.py r /nfs1/BPP/Chang_Lab/davised/scripts/template.py
 
 " remove numbers from terminal
 au TermOpen * setlocal nonumber norelativenumber
+
+" Disable folding
+set nofoldenable

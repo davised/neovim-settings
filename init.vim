@@ -75,7 +75,6 @@ Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlig
 
 Plug 'c9s/perlomni.vim'
 
-
 " python
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
@@ -487,4 +486,7 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
+" Turn off Pandoc spell-checking
+let g:pandoc#modules#disabled = [ "spell" ]
 
