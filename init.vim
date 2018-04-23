@@ -40,6 +40,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'jalvesaq/Nvim-R'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'tpope/vim-fugitive'
+Plug 'majutsushi/tagbar'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -74,10 +76,6 @@ Plug 'tomasr/molokai'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 
 Plug 'c9s/perlomni.vim'
-
-" python
-"" Python Bundle
-Plug 'davidhalter/jedi-vim'
 
 
 "*****************************************************************************
@@ -195,6 +193,10 @@ set titlestring=%F
 
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
+if exists("*fugitive#statusline")
+  set statusline+=%{fugitive#statusline()}
+endif
+
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
 nnoremap n nzzzv
@@ -206,6 +208,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#fugitive#enaled = 1
 let g:airline_skip_empty_sections = 1
 
 "*****************************************************************************
@@ -411,19 +414,8 @@ augroup vimrc-python
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
-" jedi-vim
-let g:jedi#popup_on_dot = 0
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#smart_auto_mappings = 0
-
 " syntastic
-let g:syntastic_python_checkers=['python', 'flake8']
+let g:syntastic_python_checkers=['flake8']
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
@@ -490,3 +482,5 @@ endif
 " Turn off Pandoc spell-checking
 let g:pandoc#modules#disabled = [ "spell" ]
 
+" Turn off underscore setting in Nvim-R
+let vimrplugin_assign = 0
