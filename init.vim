@@ -475,3 +475,5 @@ endif
 " Turn off Pandoc spell-checking
 let g:pandoc#modules#disabled = [ "spell" ]
 
+" Turn off underscore setting in Nvim-R
+let vimrplugin_assign = 0
