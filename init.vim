@@ -482,5 +482,16 @@ endif
 " Turn off Pandoc spell-checking
 let g:pandoc#modules#disabled = [ "spell" ]
 
+" Turn on highlight for column 80 in pandoc
+autocmd FileType pandoc setlocal colorcolumn=80
+
+" Turn on highlight for column 80 in rmd files
+autocmd FileType rmd setlocal colorcolumn=80
+
 " Turn off underscore setting in Nvim-R
 let vimrplugin_assign = 0
+let R_assign = 0
+
+" Split smartly
+set splitbelow
+set splitright
