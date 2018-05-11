@@ -9,3 +9,6 @@ au TermOpen * setlocal nonumber norelativenumber
 
 " Disable folding
 set nofoldenable
+
+" set guicursor=
+set termguicolors
