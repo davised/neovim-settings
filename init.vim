@@ -40,6 +40,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'jalvesaq/Nvim-R'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'tpope/vim-fugitive'
+Plug 'majutsushi/tagbar'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -191,6 +193,10 @@ set titlestring=%F
 
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
+if exists("*fugitive#statusline")
+  set statusline+=%{fugitive#statusline()}
+endif
+
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
 nnoremap n nzzzv
@@ -202,6 +208,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#fugitive#enaled = 1
 let g:airline_skip_empty_sections = 1
 
 "*****************************************************************************
@@ -408,7 +415,7 @@ augroup vimrc-python
 augroup END
 
 " syntastic
-let g:syntastic_python_checkers=['python', 'flake8']
+let g:syntastic_python_checkers=['flake8']
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
@@ -475,5 +482,31 @@ endif
 " Turn off Pandoc spell-checking
 let g:pandoc#modules#disabled = [ "spell" ]
 
+" Turn on highlight for column 80 in pandoc
+autocmd FileType pandoc setlocal colorcolumn=80
+
+" Turn on highlight for column 80 in rmd files
+autocmd FileType rmd setlocal colorcolumn=80
+
 " Turn off underscore setting in Nvim-R
 let vimrplugin_assign = 0
+let R_assign = 0
+
+" Split smartly
+set splitbelow
+set splitright
+
+" Set jk to exit insert mode
+inoremap jk <Esc>
+
+" Template for python files
+autocmd BufNewFile *.py r ~/.config/nvim/templates/template.py
+
+" remove numbers from terminal
+au TermOpen * setlocal nonumber norelativenumber
+
+" Disable folding
+set nofoldenable
+
+" set guicursor=
+set termguicolors
