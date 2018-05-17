@@ -483,7 +483,7 @@ endif
 let g:pandoc#modules#disabled = [ "spell" ]
 
 " Turn on highlight for column 80 in pandoc
-autocmd FileType pandoc setlocal colorcolumn=80
+autocmd FileType pandoc setlocal colorcolumn=80 tw=80 fo+=t
 
 " Turn on highlight for column 80 in rmd files
 autocmd FileType rmd setlocal colorcolumn=80
